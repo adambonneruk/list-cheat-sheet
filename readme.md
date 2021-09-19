@@ -3,6 +3,27 @@
 ## Table of Contents
 
 * [Git](#Git)
+  * [Porcelain](#porcelain)
+    * [worktree](#worktree)
+    * [clean](#clean)
+    * [reset](#reset)
+    * [diff](#diff)
+    * [revert](#revert)
+    * [bisect](#bisect)
+    * [move](#mv)
+    * [remove](#rm)
+    * [remote](#remote)
+    * [log](#log)
+    * [status](#status)
+    * [stash](#stash)
+    * [rebase](#rebase)
+    * [tag](#tag)
+  * [Plumbing](#plumbing)
+     * [cat-file](#cat-file)
+     * [reflog](#reflog)
+  * [Git-LFS](#git-lfs)
+  * [BFG](#bfg)
+  * [GPG](#gpg)
 * [Linux](#linux)
   * [ls](#ls--list)
   * [du](#du--disk-usage)
@@ -11,11 +32,133 @@
   * [base64](#base64)
   * [wc](#wc--word-count)
   * [misc.](#misc)
-* [Docker-Compose](#docker-compose)
-* [Vi / Vim](#vi--vim)
+* [Useful Combinations](#useful-linux-commands)
 
 # Git
 Doing complex stuff / fixing problems in Git.
+
+## Porcelain
+
+### Worktree
+A git repository can support multiple working trees, allowing you to check out more than one branch at a time
+
+```sh
+# start a new branch "topic" in the folder specified
+git worktree add ../topic
+
+# create worktree using an existing branch
+git worktree add ../foobar feature/foobar
+
+# delete/remove a worktree
+git worktree remove ../topic
+```
+
+### Clean
+Remove files/folders from the working directory
+```sh
+# remove file not tracked by git
+git clean -fd
+
+# remove files not tracked by git (including those ignored by .gitignore)
+git clean -fdx
+```
+
+### Reset
+Reset working directory (HEAD?) to specific commit
+```sh
+# undo changes made to any/all tracked files (revert both working tree and index to last commit)
+git reset --hard
+```
+
+### Diff
+Differences between commits/files
+```sh
+# compare working tree (your files) to staging area
+git diff
+
+# compare things in staging area to most recent commit (HEAD)
+git diff --staged
+
+# compare your working tree and index to HEAD
+git diff HEAD
+
+# compare words instead of lines using the --color-words command
+git diff --color-words
+
+# compare words with some syntax defining the change instead of whole lines using --word-diff command
+git diff --word-diff
+
+# use the stat command to list summary changes at the file level
+git diff --stat
+```
+
+### Revert
+Sometimes the wrong code is checked in, and things break. To revert back to earlier commits you can use the following commands
+
+```sh
+# revert back 2 commits but record the reverts as separate named commits
+git revert HEAD~2..
+
+# revert back 4 commits but record the jump back as a single commit
+git revert --no-commit HEAD~4..
+```
+
+### bisect
+### mv
+### rm
+### remote
+### log
+### status
+### stash
+### rebase
+### tag
+
+### submodule
+```
+--recursive
+--recurse-submodules
+```
+
+### merge
+```
+--allow-unrelated-histories
+```
+
+## Plumbing
+
+### cat-file
+### reflog
+
+## Git-LFS
+Git LFS replaces large files in your repository with tiny pointers. During normal usage, you'll never see these pointer files as they are handled automatically by Git LFS. Git LFS is a FOSS plug-in for Git. When adding a new file type to git-lfs tracking a filter must be added to the project-level .gitattributes file.
+
+```sh
+# adding all new bitmap files (.bmp) to lfs tracking
+git lfs track "*.bmp"
+```
+
+If LFS failed to pull down the files for whatever reason lfs-pull can be used to resolve the pointers
+
+```sh
+# grab missing LFS files
+git lfs pull
+```
+
+# BFG
+
+# GPG
+Create a key, export (paste into forge), and enable client-side
+```ps
+gpg --full-generate-key
+gpg -k
+gpg --armor --export
+git config --global user.signingkey 0000000000000000000000000000000000000000
+git config --global commit.gpgsign true
+```
+
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- Linux ------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------- -->
 
 # Linux
 Common Linux commands (including ```coreutils```) available in many environments.
@@ -126,4 +269,16 @@ vi
 vim
 certbot
 docker-compose
+```
+
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- Useful Linux Commands --------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------- -->
+
+# Useful Linux Commands
+Cross-Platform commands used to get useful Linux information, leveraging the tools above
+
+```sh
+# print linux version information
+cat /etc/*release
 ```
