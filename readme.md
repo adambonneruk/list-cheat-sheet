@@ -18,6 +18,8 @@
     * [stash](#stash)
     * [rebase](#rebase)
     * [tag](#tag)
+    * [submodule](#submodule)
+    * [merge](#merge)
   * [Plumbing](#plumbing)
      * [cat-file](#cat-file)
      * [reflog](#reflog)
@@ -112,7 +114,6 @@ git revert --no-commit HEAD~4..
 ### stash
 ### rebase
 ### tag
-
 ### submodule
 ```
 --recursive
@@ -120,8 +121,19 @@ git revert --no-commit HEAD~4..
 ```
 
 ### merge
-```
---allow-unrelated-histories
+```sh
+## Merging Two Repositories ##
+# pull from origin (optional)
+git pull
+
+# add a new remote (we'll call this "another")
+git remote add another ssh://git@git-remote-url-here.git
+
+# fetch from the "another" remote
+git fetch another
+
+# merge the another branch into the current branch
+git merge another/master --allow-unrelated-histories
 ```
 
 ## Plumbing
