@@ -113,6 +113,10 @@ git revert --no-commit HEAD~4..
 ### status
 ### stash
 ### rebase
+```sh
+# handy rebase script to fix/change the author/committer for previous commits
+git rebase -r <some commit before all of your bad commits> --exec 'git commit --amend --no-edit --reset-author'
+```
 ### tag
 ### submodule
 ```
