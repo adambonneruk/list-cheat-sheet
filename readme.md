@@ -2,39 +2,43 @@
 
 ## Table of Contents
 
-* [Git](#Git)
-  * [Porcelain](#porcelain)
-    * [worktree](#worktree)
-    * [clean](#clean)
-    * [reset](#reset)
-    * [diff](#diff)
-    * [revert](#revert)
-    * [bisect](#bisect)
-    * [move](#mv)
-    * [remove](#rm)
-    * [remote](#remote)
-    * [log](#log)
-    * [status](#status)
-    * [stash](#stash)
-    * [rebase](#rebase)
-    * [tag](#tag)
-    * [submodule](#submodule)
-    * [merge](#merge)
-  * [Plumbing](#plumbing)
-     * [cat-file](#cat-file)
-     * [reflog](#reflog)
-  * [Git-LFS](#git-lfs)
-  * [BFG](#bfg)
-  * [GPG](#gpg)
-* [Linux](#linux)
-  * [ls](#ls--list)
-  * [du](#du--disk-usage)
-  * [df](#df--disk-free)
-  * [tmux](#tmux--terminal-multiplexer)
-  * [base64](#base64)
-  * [wc](#wc--word-count)
-  * [misc.](#misc)
-* [Useful Combinations](#useful-linux-commands)
+- [Cheat Sheet](#cheat-sheet)
+  - [Table of Contents](#table-of-contents)
+- [Git](#git)
+  - [Porcelain](#porcelain)
+    - [Worktree](#worktree)
+    - [Clean](#clean)
+    - [Reset](#reset)
+    - [Diff](#diff)
+    - [Revert](#revert)
+    - [bisect](#bisect)
+    - [mv](#mv)
+    - [rm](#rm)
+    - [remote](#remote)
+    - [log](#log)
+    - [status](#status)
+    - [stash](#stash)
+    - [rebase](#rebase)
+    - [tag](#tag)
+    - [submodule](#submodule)
+    - [merge](#merge)
+  - [Plumbing](#plumbing)
+    - [cat-file](#cat-file)
+    - [reflog](#reflog)
+  - [Git-LFS](#git-lfs)
+- [BFG](#bfg)
+- [GPG](#gpg)
+- [Linux](#linux)
+  - [```ls``` / List](#ls--list)
+  - [```du``` / Disk Usage](#du--disk-usage)
+  - [```df``` / Disk Free](#df--disk-free)
+  - [```tmux``` / Terminal Multiplexer](#tmux--terminal-multiplexer)
+    - [Commands](#commands)
+  - [```base64```](#base64)
+  - [```wc``` / Word Count](#wc--word-count)
+  - [Misc.](#misc)
+- [Useful Linux Commands](#useful-linux-commands)
+  - [Setup SSH with Keys for Passwordless Entry](#setup-ssh-with-keys-for-passwordless-entry)
 
 # Git
 Doing complex stuff / fixing problems in Git.
@@ -297,4 +301,22 @@ Cross-Platform commands used to get useful Linux information, leveraging the too
 ```sh
 # print linux version information
 cat /etc/*release
+```
+
+## Setup SSH with Keys for Passwordless Entry
+```sh
+# list current users
+cat /etc/passwd
+
+# add user "adam"
+sudo adduser adam
+
+# add user "adam" to sudo group
+sudo adduser adam sudo
+
+# add user "adam to sudoers.d to stop pw prompt
+echo '<username> ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/010_<username>-nopasswd
+
+# copy my public key to the raspi to save login
+cat ~/.ssh/id_rsa.pub | ssh <USERNAME>@<IP-ADDRESS> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 ```
