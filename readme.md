@@ -282,3 +282,21 @@ Cross-Platform commands used to get useful Linux information, leveraging the too
 # print linux version information
 cat /etc/*release
 ```
+
+## Setup SSH with Keys for Passwordless Entry
+```sh
+# list current users
+cat /etc/passwd
+
+# add user "adam"
+sudo adduser adam
+
+# add user "adam" to sudo group
+sudo adduser adam sudo
+
+# add user "adam to sudoers.d to stop pw prompt
+echo '<username> ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/010_<username>-nopasswd
+
+# copy my public key to the raspi to save login
+cat ~/.ssh/id_rsa.pub | ssh <USERNAME>@<IP-ADDRESS> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+```

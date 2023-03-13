@@ -1,0 +1,27 @@
+df -h	HDD Space Remaining
+mc		File Explorer (Midnight Commander)
+htop	Process Explorer
+rm		Remove / Delete Files
+vim		VIM text editor
+cp		Copy
+mv		Move / Rename
+irw		Read IR Input
+chmod
+touch
+watch
+	
+-- tmux -----------------------------------------
+tmux
+tmux a
+tmux ls
+:resize-pane -U /DLR 100
+d detach
+s sessions
+% split horizontal
+" split verticle
+x delete pane
+
+-- raspi ----------------------------------------
+/opt/vc/bin/vcgencmd measure_temp	RasPi CPU Temp
+python /home/pi/scripts/hyp-off.py	Hyperion Off
+python /home/pi/scripts/hyp-on.py	Hyperion On
